@@ -1,0 +1,21 @@
+# IDE files
+.idea/
+
+# Composer vendor directory
+/vendor/
+
+# Node modules (if applicable)
+node_modules/
+
+# Git folder (usually not tracked, but added for clarity)
+.git/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+composer.lock
+
+# Environment files
+.env
+.env.local

@@ -1,5 +1,5 @@
 {
-  "name": "keycrm/keycrm-php-client",
+  "name": "mihod/keycrm-php-client",
   "description": "PHP client module for Key CRM API",
   "type": "library",
   "license": "MIT",
