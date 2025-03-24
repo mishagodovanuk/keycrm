@@ -2,6 +2,11 @@
 
 namespace KeyCrm\Client;
 
+use KeyCrm\Exception\KeyCrmException;
+
+/**
+ * Http client interface.
+ */
 interface HttpClientInterface
 {
     /**
@@ -13,7 +18,7 @@ interface HttpClientInterface
      *
      * @return array Response data as an associative array
      *
-     * @throws \KeyCrm\Exception\KeyCrmException on error.
+     * @throws KeyCrmException on error.
      */
     public function request(string $method, string $uri, array $options = []): array;
 }

@@ -5,11 +5,11 @@ namespace KeyCrm\Model;
 class OfferStocks
 {
     public int $id;
-    public string $sku;
-    public float $price;
-    public float $purchased_price;
-    public int $quantity;
-    public int $reserve;
+    public ?string $sku;
+    public ?float $price;
+    public ?float $purchased_price;
+    public ?int $quantity;
+    public ?int $reserve;
 
     /**
      * List of warehouses with stock details.

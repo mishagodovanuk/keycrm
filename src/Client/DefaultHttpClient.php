@@ -4,22 +4,41 @@ namespace KeyCrm\Client;
 
 use KeyCrm\Exception\KeyCrmException;
 
+/**
+ * Http client.
+ */
 class DefaultHttpClient implements HttpClientInterface
 {
+    /**
+     * @var string
+     */
     private string $baseUrl;
+    /**
+     * @var string
+     */
     private string $bearerToken;
 
+    /**
+     * @param string $baseUrl
+     * @param string $bearerToken
+     */
     public function __construct(string $baseUrl, string $bearerToken)
     {
         $this->baseUrl     = rtrim($baseUrl, '/');
         $this->bearerToken = $bearerToken;
     }
 
+    /**
+     * @param string $method
+     * @param string $uri
+     * @param array $options
+     * @return array
+     * @throws KeyCrmException
+     */
     public function request(string $method, string $uri, array $options = []): array
     {
         $url = $this->baseUrl . '/' . ltrim($uri, '/');
         $headers = $options['headers'] ?? [];
-        // Add the Bearer token authentication
         $headers['Authorization'] = 'Bearer ' . $this->bearerToken;
         $headers['Accept'] = 'application/json';
 
@@ -36,7 +55,6 @@ class DefaultHttpClient implements HttpClientInterface
 
         if (isset($options['body'])) {
             curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($options['body']));
-            // For JSON content
             $headers['Content-Type'] = 'application/json';
         }
 
