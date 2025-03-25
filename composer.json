@@ -1,5 +1,5 @@
 {
-  "name": "mihod/keycrm-php-client",
+  "name": "mishagodovanuk/keycrm",
   "description": "PHP client module for Key CRM API",
   "type": "library",
   "license": "MIT",
@@ -7,7 +7,7 @@
   "prefer-stable": true,
   "authors": [
     {
-      "name": "mihod",
+      "name": "mishagodovanuk",
       "email": "mishagodovanuk@gmail.com"
     }
   ],
