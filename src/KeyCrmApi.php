@@ -9,6 +9,8 @@ use KeyCrm\Service\ProductService;
 use KeyCrm\Service\ProductServiceInterface;
 use KeyCrm\Service\OfferService;
 use KeyCrm\Service\OfferServiceInterface;
+use KeyCrm\Service\CategoryService;
+use KeyCrm\Service\CategoryServiceInterface;
 
 /**
  * KeyCrm Api.
@@ -29,6 +31,11 @@ class KeyCrmApi
     private OfferServiceInterface|OfferService $offerService;
 
     /**
+     * @var CategoryService|CategoryServiceInterface
+     */
+    private CategoryServiceInterface|CategoryService $categoryService;
+
+    /**
      * @param HttpClientInterface $httpClient
      */
     public function __construct(HttpClientInterface $httpClient)
@@ -36,6 +43,7 @@ class KeyCrmApi
         $this->companyService = new CompanyService($httpClient);
         $this->productService = new ProductService($httpClient);
         $this->offerService   = new OfferService($httpClient);
+        $this->categoryService = new CategoryService($httpClient);
     }
 
     /**
@@ -60,5 +68,13 @@ class KeyCrmApi
     public function offers(): OfferServiceInterface
     {
         return $this->offerService;
+    }
+
+    /**
+     * @return CategoryServiceInterface
+     */
+    public function categories(): CategoryServiceInterface
+    {
+        return $this->categoryService;
     }
 }
