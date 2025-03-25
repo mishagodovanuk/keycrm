@@ -3,6 +3,8 @@
   "description": "PHP client module for Key CRM API",
   "type": "library",
   "license": "MIT",
+  "minimum-stability": "dev",
+  "prefer-stable": true,
   "authors": [
     {
       "name": "mihod",
