@@ -7,7 +7,7 @@ A PHP client module for Key CRM API, built using PHP 8.1 with best practices, SO
 Install via Composer:
 
 ```
-composer require mihod/keycrm-php-client
+composer require mishagodovanuk/keycrm:dev-main
 ```
 
 ## Usage Example

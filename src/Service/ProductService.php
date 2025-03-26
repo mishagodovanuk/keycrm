@@ -66,23 +66,45 @@ class ProductService implements ProductServiceInterface
      * @return array
      * @throws KeyCrmException
      */
-    public function list(array $query = []): array
+    public function list(array $query = [], bool $fetchAllPages = true): array
     {
-        $uri = '/products';
+        if (!$fetchAllPages) {
+            $uri = '/products';
 
-        if ($query) {
-            $uri .= '?' . http_build_query($query);
+            if (!empty($query)) {
+                $uri .= '?' . http_build_query($query);
+            }
+
+            $response = $this->httpClient->request('GET', $uri);
+            $products = [];
+
+            foreach ($response['data'] as $productData) {
+                $products[] = $this->mapToProduct($productData);
+            }
+            return $products;
+        } else {
+            $allProducts = [];
+            $page = $query['page'] ?? 1;
+            $limit = $query['limit'] ?? 15;
+            
+            do {
+                $query['page'] = $page;
+                $query['limit'] = $limit;
+                $uri = '/products?' . http_build_query($query);
+                $response = $this->httpClient->request('GET', $uri);
+                
+                foreach ($response['data'] as $productData) {
+                    $allProducts[] = $this->mapToProduct($productData);
+                }
+                
+                $hasNextPage = isset($response['next_page_url']) && !empty($response['next_page_url']);
+                $page++;
+            } while ($hasNextPage);
+            
+            return $allProducts;
         }
+    }   
 
-        $response = $this->httpClient->request('GET', $uri);
-        $products = [];
-
-        foreach ($response['data'] as $productData) {
-            $products[] = $this->mapToProduct($productData);
-        }
-
-        return $products;
-    }
 
     /**
      * @param int $productId
